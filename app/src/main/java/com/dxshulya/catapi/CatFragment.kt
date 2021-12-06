@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import retrofit2.*
 
@@ -14,22 +16,23 @@ class CatFragment : Fragment() {
 
     private lateinit var image: ImageView
 
-    //private var catService: APIInterface? = null
-    lateinit var mService: RetrofitServices
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         image = view.findViewById(R.id.image)
-        //catService = API.getClient()?.create(APIInterface::class.java)
-        mService = Common.retrofitService
 
-        performRequest()
-
+        mainViewModel.cat.observe(
+            viewLifecycleOwner,
+            { cat ->
+                cat?.let {
+                    Picasso.get().load(it.url).into(image)
+                }
+            })
     }
 
     override fun onCreateView(
@@ -47,25 +50,5 @@ class CatFragment : Fragment() {
 
                 }
             }
-    }
-
-    private fun performRequest() {
-
-        mService.getCatList().enqueue(object : Callback<MutableList<Cat>> {
-            override fun onFailure(call: Call<MutableList<Cat>>, t: Throwable) {
-                Log.e("ошибка", "ошибка", t)
-            }
-
-            override fun onResponse(
-                call: Call<MutableList<Cat>>,
-                response: Response<MutableList<Cat>>
-            ) {
-                response.isSuccessful
-                val body = response.body()
-                Picasso.get().load(body?.firstOrNull()?.url).into(image)
-
-                Log.e("массив", "ошибка")
-            }
-        })
     }
 }
