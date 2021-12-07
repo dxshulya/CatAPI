@@ -12,7 +12,7 @@ class CatRepository {
     val getCatLiveData: MutableLiveData<MutableList<Cat>>
     get() {
         val data: MutableLiveData<MutableList<Cat>> = MutableLiveData<MutableList<Cat>>()
-        compositeDisposable.add(apiService.getCatList()
+        compositeDisposable.add(apiService.getCatList("10")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ cats ->
