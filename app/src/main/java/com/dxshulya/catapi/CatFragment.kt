@@ -1,6 +1,7 @@
 package com.dxshulya.catapi
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,10 @@ import com.squareup.picasso.Picasso
 
 class CatFragment : Fragment() {
 
-    private lateinit var image: ImageView
-    private lateinit var recyclerView: RecyclerView
-    private var adapter: CatAdapter? = CatAdapter(emptyList())
+    var recyclerView: RecyclerView? = null
+    private  var adapter: CatAdapter? = null
+
+
 
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
@@ -25,20 +27,6 @@ class CatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        image = view.findViewById(R.id.image)
-        mainViewModel.showCat()
-        mainViewModel.cat.observe(
-            viewLifecycleOwner,
-            { cat ->
-                cat?.let {
-                    Picasso.get().load(it.url).into(image)
-                }
-            })
-
-        recyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
-
     }
 
     override fun onCreateView(
@@ -47,39 +35,47 @@ class CatFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.cat_list, container, false)
 
+        mainViewModel!!.getCatList.observe(viewLifecycleOwner, {cats ->
+            Log.e("CatFragment", "cats" + cats[0].id)
+        })
+
+        recyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
+        recyclerView!!.layoutManager = LinearLayoutManager(context)
+        recyclerView!!.adapter = adapter
+
+        mainViewModel!!.getCatList.observe( viewLifecycleOwner, {cats ->
+            Log.e("CatFragment", "cats " + cats[0].url)
+
+            adapter = CatAdapter(cats)
+            adapter!!.notifyDataSetChanged()
+            recyclerView!!.adapter = adapter
+        })
+
         return view
     }
 
+    inner class CatHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-
-    private inner class CatHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
-
-        private lateinit var cat: Cat
-
-        fun bind(cat: Cat) {
-            this.cat = cat
-        }
-
-        override fun onClick(v: View) {
-        }
+        var imageCat: ImageView = itemView.findViewById(R.id.image)
     }
 
-    private inner class CatAdapter(var cats: List<Cat>)
+    private inner class CatAdapter(var catList: MutableList<Cat>)
         : RecyclerView.Adapter<CatHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-                : CatHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatHolder {
             val view = layoutInflater.inflate(R.layout.cat_item, parent, false)
             return CatHolder(view)
         }
 
         override fun onBindViewHolder(holder: CatHolder, position: Int) {
-            val cat = cats[position]
-            holder.bind(cat)
+            //holder.imageCat = Picasso.get().load(catList[position].url!!).into(image)
         }
 
-        override fun getItemCount() = cats.size
+        override fun getItemCount(): Int {
+            return catList.size
+        }
     }
+
 
     companion object {
         fun newInstance(): CatFragment {
