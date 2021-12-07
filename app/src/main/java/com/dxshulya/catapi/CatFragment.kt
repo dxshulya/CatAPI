@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,7 +57,16 @@ class CatFragment : Fragment() {
 
     inner class CatHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
+        private lateinit var cat: Cat
         var imageCat: ImageView = itemView.findViewById(R.id.image)
+
+        fun bind(cat: Cat) {
+            this.cat = cat
+            var url = cat.url
+            Picasso.get().load(url).into(imageCat)
+
+        }
+
     }
 
     private inner class CatAdapter(var catList: MutableList<Cat>)
@@ -68,14 +78,15 @@ class CatFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: CatHolder, position: Int) {
-            //holder.imageCat = Picasso.get().load(catList[position].url!!).into(image)
+            //holder.imageCat = Picasso.get().load(catList[position].url!!).into(holder.image)
+            val cat = catList[position]
+            holder.bind(cat)
         }
 
         override fun getItemCount(): Int {
             return catList.size
         }
     }
-
 
     companion object {
         fun newInstance(): CatFragment {
