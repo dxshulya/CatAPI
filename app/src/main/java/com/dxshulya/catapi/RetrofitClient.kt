@@ -11,9 +11,19 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
     private var retrofit: Retrofit? = null
 
-    fun getRetrofitClient(baseUrl: String) : Retrofit {
+    fun getRetrofitClient(baseUrl: String) : Retrofit? {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor { chain ->
+            val original = chain.request()
+
+            val requestBuilder = original.newBuilder()
+                .header("Authorization", "f6880836-42d2-4988-b97b-e87481d59352")
+            val request = requestBuilder.build()
+            chain.proceed(request)
+        }
 
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
             .readTimeout((60*2).toLong(), TimeUnit.SECONDS)
@@ -22,7 +32,7 @@ object RetrofitClient {
             .addInterceptor(interceptor)
             .build()
 
-        if(retrofit == null) {
+            if(retrofit == null) {
             retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -30,6 +40,6 @@ object RetrofitClient {
                 .client(okHttpClient)
                 .build()
         }
-        return retrofit!!
+        return retrofit
     }
 }

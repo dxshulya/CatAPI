@@ -14,16 +14,11 @@ import com.squareup.picasso.Picasso
 
 class CatFragment : Fragment() {
 
-    var recyclerView: RecyclerView? = null
-    private  var adapter: CatAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var adapter: CatAdapter? = null
 
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -32,7 +27,7 @@ class CatFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.cat_list, container, false)
 
-        mainViewModel!!.getCatList.observe(viewLifecycleOwner, {cats ->
+        mainViewModel!!.catList.observe(viewLifecycleOwner, { cats ->
             Log.e("CatFragment", "cats" + cats[0].id)
         })
 
@@ -40,7 +35,7 @@ class CatFragment : Fragment() {
         recyclerView!!.layoutManager = LinearLayoutManager(context)
         recyclerView!!.adapter = adapter
 
-        mainViewModel!!.getCatList.observe( viewLifecycleOwner, {cats ->
+        mainViewModel.catList.observe( viewLifecycleOwner, { cats ->
             Log.e("CatFragment", "cats " + cats[0].url)
 
             adapter = CatAdapter(cats)

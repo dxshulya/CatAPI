@@ -10,6 +10,6 @@ import retrofit2.Response
 class MainViewModel : ViewModel() {
     private val catRepository: CatRepository = CatRepository()
 
-    val getCatList: LiveData<MutableList<Cat>>
+    val catList: LiveData<MutableList<Cat>>
     get() = catRepository.getCatLiveData
 }
