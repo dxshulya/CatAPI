@@ -10,10 +10,17 @@ import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import java.util.*
+
 
 class CatFragment : Fragment() {
 
+    interface Callbacks {
+        fun onCatSelected(url: String)
+    }
+
+    private var callbacks: Callbacks? = null
     private var recyclerView: RecyclerView? = null
     private var adapter: CatAdapter? = null
 
@@ -51,10 +58,18 @@ class CatFragment : Fragment() {
         private lateinit var cat: Cat
         var imageCat: ImageView = itemView.findViewById(R.id.image)
 
+        init {
+            imageCat.apply {
+                setOnClickListener {
+                    callbacks?.onCatSelected(cat.url)
+                }
+            }
+        }
+
         fun bind(cat: Cat) {
             this.cat = cat
-            var url = cat.url
-            Picasso.get().load(url).into(imageCat)
+            val url = cat.url
+            Glide.with(this@CatFragment).load(url).into(imageCat)
         }
     }
 
