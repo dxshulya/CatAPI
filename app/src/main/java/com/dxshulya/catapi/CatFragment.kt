@@ -1,5 +1,6 @@
 package com.dxshulya.catapi
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,6 +29,11 @@ class CatFragment : Fragment() {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,12 +59,18 @@ class CatFragment : Fragment() {
         return view
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
+    }
+
     inner class CatHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         private lateinit var cat: Cat
         var imageCat: ImageView = itemView.findViewById(R.id.image)
 
         init {
+            //itemView.setOnClickListener(this)
             imageCat.apply {
                 setOnClickListener {
                     callbacks?.onCatSelected(cat.url)
