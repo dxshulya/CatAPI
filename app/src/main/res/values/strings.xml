@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CatAPI</string>
+    <string name="back_button">Назад в список</string>
 </resources>
