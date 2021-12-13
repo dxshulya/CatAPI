@@ -2,7 +2,6 @@ package com.dxshulya.catapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toolbar
 
 class MainActivity : AppCompatActivity(), ICallbacks {
 

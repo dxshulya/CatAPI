@@ -3,13 +3,11 @@ package com.dxshulya.catapi
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import androidx.appcompat.app.AppCompatActivity
 
 class ShowCatFragment : Fragment() {
 
@@ -21,8 +19,6 @@ class ShowCatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.show_cat, container, false)
-
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         imageCat = view.findViewById(R.id.show_cat)
         backButton = view.findViewById(R.id.back_button)
@@ -50,5 +46,4 @@ class ShowCatFragment : Fragment() {
             }
         }
     }
-
 }

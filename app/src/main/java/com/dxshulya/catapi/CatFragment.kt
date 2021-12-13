@@ -1,6 +1,5 @@
 package com.dxshulya.catapi
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -8,13 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import java.util.*
-
+import java.io.Serializable
+import android.os.Parcelable
 
 class CatFragment : Fragment() {
 
@@ -25,6 +22,17 @@ class CatFragment : Fragment() {
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        /*if (savedInstanceState != null) {
+            val savedRecyclerLayoutState: Parcelable? =
+                savedInstanceState.getParcelable("save_rv")
+            recyclerView!!.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
+        }*/
+
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,7 +45,7 @@ class CatFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.cat_list, container, false)
 
-        mainViewModel!!.catList.observe(viewLifecycleOwner, { cats ->
+        mainViewModel.catList.observe(viewLifecycleOwner, { cats ->
             Log.e("CatFragment", "cats" + cats[0].id)
         })
 
@@ -54,6 +62,12 @@ class CatFragment : Fragment() {
         })
 
         return view
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //outState.putParcelable("save_rv", recyclerView!!.layoutManager!!.onSaveInstanceState())
+
     }
 
     override fun onDetach() {
