@@ -2,8 +2,9 @@ package com.dxshulya.catapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toolbar
 
-class MainActivity : AppCompatActivity(), CatFragment.Callbacks {
+class MainActivity : AppCompatActivity(), ICallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity(), CatFragment.Callbacks {
                 .commit()
         }
     }
+
     override fun onCatSelected(url: String) {
         val fragment = ShowCatFragment.newInstance(url)
         supportFragmentManager

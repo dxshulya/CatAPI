@@ -1,5 +1,6 @@
 package com.dxshulya.catapi
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -17,11 +18,7 @@ import java.util.*
 
 class CatFragment : Fragment() {
 
-    interface Callbacks {
-        fun onCatSelected(url: String)
-    }
-
-    private var callbacks: Callbacks? = null
+    private var callbacks: ICallbacks? = null
     private var recyclerView: RecyclerView? = null
     private var adapter: CatAdapter? = null
 
@@ -31,7 +28,7 @@ class CatFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callbacks = context as Callbacks?
+        callbacks = context as ICallbacks?
     }
 
     override fun onCreateView(
@@ -51,7 +48,7 @@ class CatFragment : Fragment() {
         mainViewModel.catList.observe( viewLifecycleOwner, { cats ->
             Log.e("CatFragment", "cats " + cats[0].url)
 
-            adapter = CatAdapter(cats)
+            adapter = context?.let { CatAdapter(it, cats) }
             adapter!!.notifyDataSetChanged()
             recyclerView!!.adapter = adapter
         })
@@ -62,45 +59,6 @@ class CatFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         callbacks = null
-    }
-
-    inner class CatHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-
-        private lateinit var cat: Cat
-        var imageCat: ImageView = itemView.findViewById(R.id.image)
-
-        init {
-            //itemView.setOnClickListener(this)
-            imageCat.apply {
-                setOnClickListener {
-                    callbacks?.onCatSelected(cat.url)
-                }
-            }
-        }
-
-        fun bind(cat: Cat) {
-            this.cat = cat
-            val url = cat.url
-            Glide.with(this@CatFragment).load(url).into(imageCat)
-        }
-    }
-
-    private inner class CatAdapter(var catList: MutableList<Cat>)
-        : RecyclerView.Adapter<CatHolder>() {
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatHolder {
-            val view = layoutInflater.inflate(R.layout.cat_item, parent, false)
-            return CatHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: CatHolder, position: Int) {
-            val cat = catList[position]
-            holder.bind(cat)
-        }
-
-        override fun getItemCount(): Int {
-            return catList.size
-        }
     }
 
     companion object {
