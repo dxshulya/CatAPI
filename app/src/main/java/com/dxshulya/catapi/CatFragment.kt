@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.Serializable
-import android.os.Parcelable
 
 class CatFragment : Fragment() {
 
@@ -25,12 +23,6 @@ class CatFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*if (savedInstanceState != null) {
-            val savedRecyclerLayoutState: Parcelable? =
-                savedInstanceState.getParcelable("save_rv")
-            recyclerView!!.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
-        }*/
-
     }
 
 
@@ -62,12 +54,6 @@ class CatFragment : Fragment() {
         })
 
         return view
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        //outState.putParcelable("save_rv", recyclerView!!.layoutManager!!.onSaveInstanceState())
-
     }
 
     override fun onDetach() {

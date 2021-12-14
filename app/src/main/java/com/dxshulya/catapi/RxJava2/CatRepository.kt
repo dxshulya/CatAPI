@@ -1,6 +1,7 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.RxJava2
 
 import androidx.lifecycle.MutableLiveData
+import com.dxshulya.catapi.Cat
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

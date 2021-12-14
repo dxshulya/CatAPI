@@ -7,3 +7,6 @@ data class Cat(
     val url: String,
     val width: Int
 )
+data class RecyclerCat(
+    val items: List<Cat>
+)

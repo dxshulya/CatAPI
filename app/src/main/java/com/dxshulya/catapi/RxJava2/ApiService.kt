@@ -1,5 +1,6 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.RxJava2
 
+import com.dxshulya.catapi.Cat
 import io.reactivex.Observable
 import retrofit2.http.*
 

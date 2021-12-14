@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 
 class CatAdapter (var context: Context, var catList: MutableList<Cat>):
         RecyclerView.Adapter<CatAdapter.CatHolder>() {
+
             inner class CatHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
                 private lateinit var cat: Cat
