@@ -1,4 +1,4 @@
-package com.dxshulya.catapi.RxJava2
+package com.dxshulya.catapi
 
 import com.dxshulya.catapi.Cat
 import io.reactivex.Observable

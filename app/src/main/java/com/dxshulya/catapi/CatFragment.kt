@@ -29,6 +29,7 @@ class CatFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as ICallbacks?
+        (activity?.applicationContext as App).component.inject(this)
     }
 
     override fun onCreateView(

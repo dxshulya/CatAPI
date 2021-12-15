@@ -3,16 +3,29 @@ package com.dxshulya.catapi
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 
-class ShowCatFragment : Fragment() {
+class ShowCatFragment : Fragment(), IBackArrow {
 
     private lateinit var imageCat: ImageView
     private lateinit var backButton: Button
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.enableToolBar()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
+        return this.findNavController().navigateUp()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

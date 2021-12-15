@@ -1,13 +1,19 @@
-package com.dxshulya.catapi.RxJava2
+package com.dxshulya.catapi
 
 import androidx.lifecycle.MutableLiveData
-import com.dxshulya.catapi.Cat
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.lang.reflect.Constructor
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CatRepository {
-    private val apiService: ApiService? = Common.getApiService
+@Singleton
+class CatRepository
+    @Inject constructor(
+            private val apiService: ApiService
+        ) {
+    //private val apiService: ApiService? = Common.getApiService
     private val compositeDisposable = CompositeDisposable()
 
     val getCatLiveData: MutableLiveData<MutableList<Cat>>
