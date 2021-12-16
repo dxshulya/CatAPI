@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import javax.inject.Inject
 
 class CatFragment : Fragment() {
 
@@ -17,9 +18,12 @@ class CatFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var adapter: CatAdapter? = null
 
-    private val mainViewModel: MainViewModel by lazy {
+    @Inject
+    lateinit var mainViewModel: MainViewModel
+
+    /*private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

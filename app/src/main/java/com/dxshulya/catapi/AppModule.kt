@@ -1,12 +1,15 @@
 package com.dxshulya.catapi
 
-import com.dxshulya.catapi.Common.BASE_URL
+import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-class AppModule () {
+@Module
+class AppModule (private val app: App) {
+
+    val BASE_URL = "https://api.thecatapi.com/v1/"
 
     @Singleton
     @Provides

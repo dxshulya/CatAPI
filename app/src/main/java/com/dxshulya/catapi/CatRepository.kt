@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @Singleton
 class CatRepository
     @Inject constructor(
-            private val apiService: ApiService
+            private val apiService: ApiService?
         ) {
     //private val apiService: ApiService? = Common.getApiService
     private val compositeDisposable = CompositeDisposable()
