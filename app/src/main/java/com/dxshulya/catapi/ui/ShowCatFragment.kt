@@ -1,44 +1,36 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.dxshulya.catapi.R
 
 class ShowCatFragment : Fragment() {
 
     private lateinit var imageCat: ImageView
     private lateinit var backButton: Button
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.show_cat, container, false)
-
         imageCat = view.findViewById(R.id.show_cat)
         backButton = view.findViewById(R.id.back_button)
         backButton.apply {
             setOnClickListener {
-                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                /*val transaction = activity?.supportFragmentManager?.beginTransaction()
                 transaction?.replace(R.id.fragment_container, CatFragment())
                 transaction?.disallowAddToBackStack()
-                transaction?.commit()
+                transaction?.commit()*/
             }
         }
-        val url: String = arguments?.getSerializable("catURL") as String
+        val url: String = arguments?.getString("catURL") as String
         Glide.with(this).load(url).into(imageCat)
         return view
     }
@@ -47,7 +39,7 @@ class ShowCatFragment : Fragment() {
 
         fun newInstance(url: String): ShowCatFragment {
             val args = Bundle().apply {
-                putSerializable("catURL", url)
+                putString("catURL", url)
             }
             return ShowCatFragment().apply {
                 arguments = args

@@ -1,4 +1,4 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import javax.inject.Inject
+import com.dxshulya.catapi.CatAdapter
+import com.dxshulya.catapi.IBackButton
+import com.dxshulya.catapi.R
 
 class CatFragment : Fragment() {
 
-    private var callbacks: ICallbacks? = null
+    private var backButton: IBackButton? = null
     private var recyclerView: RecyclerView? = null
     private var adapter: CatAdapter? = null
 
@@ -22,14 +24,9 @@ class CatFragment : Fragment() {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callbacks = context as ICallbacks?
+        backButton = context as IBackButton?
     }
 
     override fun onCreateView(
@@ -37,29 +34,27 @@ class CatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.cat_list, container, false)
-
         mainViewModel.catList.observe(viewLifecycleOwner, { cats ->
             Log.e("CatFragment", "cats " + cats[0].id)
         })
 
         recyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
-        recyclerView!!.adapter = adapter
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+        recyclerView?.adapter = adapter
 
         mainViewModel.catList.observe( viewLifecycleOwner, { cats ->
             Log.e("CatFragment", "cats " + cats[0].url)
 
             adapter = context?.let { CatAdapter(it, cats) }
             adapter!!.notifyDataSetChanged()
-            recyclerView!!.adapter = adapter
+            recyclerView?.adapter = adapter
         })
-
         return view
     }
 
     override fun onDetach() {
         super.onDetach()
-        callbacks = null
+        backButton = null
     }
 
     companion object {

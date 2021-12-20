@@ -1,4 +1,4 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.intercept
 
 import okhttp3.Interceptor
 import okhttp3.Response

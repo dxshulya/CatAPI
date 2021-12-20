@@ -2,8 +2,12 @@ package com.dxshulya.catapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dxshulya.catapi.ui.CatFragment
+import com.dxshulya.catapi.ui.ShowCatFragment
 
-class MainActivity : AppCompatActivity(), ICallbacks {
+const val AMOUNT_OF_CATS = "10"
+
+class MainActivity : AppCompatActivity(), IBackButton {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

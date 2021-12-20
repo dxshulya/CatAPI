@@ -1,4 +1,4 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.model
 
 data class Cat(
     val breeds: List<Any>,

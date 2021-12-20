@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dxshulya.catapi.model.Cat
 
 class CatAdapter (var context: Context, var catList: MutableList<Cat>):
         RecyclerView.Adapter<CatAdapter.CatHolder>() {
@@ -15,13 +16,13 @@ class CatAdapter (var context: Context, var catList: MutableList<Cat>):
 
                 private lateinit var cat: Cat
                 var imageCat: ImageView = itemView.findViewById(R.id.image)
-                private var callbacks: ICallbacks? = null
+                private var backButton: IBackButton? = null
 
                 init {
                     imageCat.apply {
                         setOnClickListener {
-                            callbacks = context as ICallbacks?
-                            callbacks?.onCatSelected(cat.url)
+                            backButton = context as IBackButton?
+                            backButton?.onCatSelected(cat.url)
                         }
                     }
                 }

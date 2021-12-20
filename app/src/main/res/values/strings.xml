@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Коты</string>
     <string name="back_button">Назад в список</string>
+    <string name="title_list">Список котиков</string>
+    <string name="title_cat">Выбранный котик</string>
+    <string name="amountCats">10</string>
 </resources>

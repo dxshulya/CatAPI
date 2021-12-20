@@ -1,7 +1,7 @@
 package com.dxshulya.catapi.modules
 
 import com.dxshulya.catapi.ApiService
-import com.dxshulya.catapi.KeyInterceptor
+import com.dxshulya.catapi.intercept.KeyInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -40,11 +40,13 @@ class NetModule (private val baseUrl: String, private val key: String) {
         val okHttpClient: OkHttpClient.Builder = OkHttpClient.Builder()
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-        okHttpClient.readTimeout((60*2).toLong(), TimeUnit.SECONDS)
-        okHttpClient.connectTimeout((60*2).toLong(), TimeUnit.SECONDS)
-        okHttpClient.writeTimeout((60*2).toLong(), TimeUnit.SECONDS)
-        okHttpClient.addInterceptor(interceptor)
-        okHttpClient.addInterceptor(KeyInterceptor(key))
+        okHttpClient.run {
+            readTimeout((60*2).toLong(), TimeUnit.SECONDS)
+            connectTimeout((60*2).toLong(), TimeUnit.SECONDS)
+            writeTimeout((60*2).toLong(), TimeUnit.SECONDS)
+            addInterceptor(interceptor)
+            addInterceptor(KeyInterceptor(key))
+        }
         return okHttpClient.build()
     }
 

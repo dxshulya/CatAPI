@@ -1,5 +1,6 @@
 package com.dxshulya.catapi
 
+import com.dxshulya.catapi.model.Cat
 import io.reactivex.Observable
 import retrofit2.http.*
 
