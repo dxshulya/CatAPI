@@ -11,7 +11,7 @@ import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 
-class ShowCatFragment : Fragment(), IBackArrow {
+class ShowCatFragment : Fragment() {
 
     private lateinit var imageCat: ImageView
     private lateinit var backButton: Button
@@ -19,13 +19,8 @@ class ShowCatFragment : Fragment(), IBackArrow {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.enableToolBar()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-        return this.findNavController().navigateUp()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

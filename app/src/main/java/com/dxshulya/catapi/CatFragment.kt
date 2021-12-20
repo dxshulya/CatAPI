@@ -18,12 +18,9 @@ class CatFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var adapter: CatAdapter? = null
 
-    @Inject
-    lateinit var mainViewModel: MainViewModel
-
-    /*private val mainViewModel: MainViewModel by lazy {
+    private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
-    }*/
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +30,6 @@ class CatFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as ICallbacks?
-        (activity?.applicationContext as App).component.inject(this)
     }
 
     override fun onCreateView(

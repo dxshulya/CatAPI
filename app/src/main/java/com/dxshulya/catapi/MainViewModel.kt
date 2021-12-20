@@ -1,17 +1,20 @@
 package com.dxshulya.catapi
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-class MainViewModel
-@Inject constructor(
-  private val catRepository: CatRepository
-) : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    //private val catRepository: CatRepository = CatRepository()
+    init {
+        App.getInstance().appComponent.inject(this)
+    }
 
+    @Inject
+    lateinit var catRepository: CatRepository
 
     val catList: LiveData<MutableList<Cat>>
         get() = catRepository.getCatLiveData
+
 }

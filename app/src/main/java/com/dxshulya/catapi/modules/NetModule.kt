@@ -1,6 +1,11 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.modules
 
+import com.dxshulya.catapi.ApiService
+import com.dxshulya.catapi.CatRepository
+import com.dxshulya.catapi.KeyInterceptor
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,27 +15,29 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-class NetModule(private val baseUrl: String, private val key: String) {
+@Module
+class NetModule (private val baseUrl: String, private val key: String) {
+
     @Provides
     @Singleton
-    fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(gson: Gson, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(okHttpClient)
+            .client(client)
             .build()
     }
 
     @Provides
     @Singleton
-    fun providesAPI(retrofit: Retrofit): ApiService {
+    fun provideAPI(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun providesOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         val okHttpClient: OkHttpClient.Builder = OkHttpClient.Builder()
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -41,4 +48,10 @@ class NetModule(private val baseUrl: String, private val key: String) {
         okHttpClient.addInterceptor(KeyInterceptor(key))
         return okHttpClient.build()
     }
+
+/*    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+    }*/
 }
