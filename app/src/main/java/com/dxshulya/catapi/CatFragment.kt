@@ -39,7 +39,7 @@ class CatFragment : Fragment() {
         val view = inflater.inflate(R.layout.cat_list, container, false)
 
         mainViewModel.catList.observe(viewLifecycleOwner, { cats ->
-            Log.e("CatFragment", "cats" + cats[0].id)
+            Log.e("CatFragment", "cats " + cats[0].id)
         })
 
         recyclerView = view.findViewById(R.id.recycler_view) as RecyclerView

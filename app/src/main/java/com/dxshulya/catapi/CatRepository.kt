@@ -4,9 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.lang.reflect.Constructor
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class CatRepository (private val api: ApiService?) {
 

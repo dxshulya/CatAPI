@@ -1,7 +1,6 @@
 package com.dxshulya.catapi.modules
 
 import com.dxshulya.catapi.ApiService
-import com.dxshulya.catapi.CatRepository
 import com.dxshulya.catapi.KeyInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -49,9 +48,9 @@ class NetModule (private val baseUrl: String, private val key: String) {
         return okHttpClient.build()
     }
 
-/*    @Provides
+    @Provides
     @Singleton
     fun provideGson(): Gson {
-        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
-    }*/
+        return GsonBuilder().create()
+    }
 }
