@@ -5,9 +5,9 @@ import com.dxshulya.catapi.model.Cat
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+const val AMOUNT_OF_CATS = "10"
 
 class CatRepository (private val api: ApiService?) {
-
     private val compositeDisposable = CompositeDisposable()
     val getCatLiveData: MutableLiveData<MutableList<Cat>>
         get() {

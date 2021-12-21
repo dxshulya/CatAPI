@@ -1,5 +1,5 @@
 package com.dxshulya.catapi
 
-interface IBackButton {
+interface ISelectCat {
     fun onCatSelected(url: String)
 }

@@ -24,10 +24,10 @@ class ShowCatFragment : Fragment() {
         backButton = view.findViewById(R.id.back_button)
         backButton.apply {
             setOnClickListener {
-                /*val transaction = activity?.supportFragmentManager?.beginTransaction()
+                val transaction = activity?.supportFragmentManager?.beginTransaction()
                 transaction?.replace(R.id.fragment_container, CatFragment())
                 transaction?.disallowAddToBackStack()
-                transaction?.commit()*/
+                transaction?.commit()
             }
         }
         val url: String = arguments?.getString("catURL") as String

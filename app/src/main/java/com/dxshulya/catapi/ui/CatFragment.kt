@@ -10,13 +10,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dxshulya.catapi.CatAdapter
-import com.dxshulya.catapi.IBackButton
+import com.dxshulya.catapi.adapter.CatAdapter
+import com.dxshulya.catapi.ISelectCat
 import com.dxshulya.catapi.R
+import com.dxshulya.catapi.model.Cat
 
 class CatFragment : Fragment() {
 
-    private var backButton: IBackButton? = null
+    private var selectCat: ISelectCat? = null
     private var recyclerView: RecyclerView? = null
     private var adapter: CatAdapter? = null
 
@@ -26,7 +27,7 @@ class CatFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        backButton = context as IBackButton?
+        selectCat = context as ISelectCat?
     }
 
     override fun onCreateView(
@@ -54,7 +55,7 @@ class CatFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        backButton = null
+        selectCat = null
     }
 
     companion object {
