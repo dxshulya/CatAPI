@@ -21,6 +21,7 @@ class CatRepository (private val api: ApiService?) {
                                 data.value = it
                             }
                             })
+                    //compositeDisposable.dispose()
                 }
             return data
         }

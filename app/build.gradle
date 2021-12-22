@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
 }
-
 android {
     compileSdk 31
 
@@ -31,11 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    kapt {
-        generateStubs = true
-    }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -71,4 +68,5 @@ dependencies {
 
     implementation 'com.google.dagger:dagger:2.40.5'
     kapt 'com.google.dagger:dagger-compiler:2.40.5'
+
 }
