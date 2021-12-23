@@ -1,4 +1,4 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.api
 
 import com.dxshulya.catapi.model.Cat
 import io.reactivex.Observable

@@ -1,6 +1,6 @@
 package com.dxshulya.catapi.modules
 
-import com.dxshulya.catapi.ApiService
+import com.dxshulya.catapi.api.ApiService
 import com.dxshulya.catapi.CatRepository
 import dagger.Module
 import dagger.Provides

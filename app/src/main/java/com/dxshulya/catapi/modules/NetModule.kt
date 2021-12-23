@@ -1,6 +1,6 @@
 package com.dxshulya.catapi.modules
 
-import com.dxshulya.catapi.ApiService
+import com.dxshulya.catapi.api.ApiService
 import com.dxshulya.catapi.intercept.KeyInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

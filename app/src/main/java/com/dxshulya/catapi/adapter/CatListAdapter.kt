@@ -2,12 +2,13 @@ package com.dxshulya.catapi.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dxshulya.catapi.ISelectCat
 import com.dxshulya.catapi.databinding.CatItemBinding
 import com.dxshulya.catapi.model.Cat
+import com.dxshulya.catapi.ui.CatFragmentDirections
 
 class CatListAdapter: androidx.recyclerview.widget.ListAdapter<Cat, CatListAdapter.CatViewHolder>(CatDiffCallback()) {
 
@@ -23,16 +24,14 @@ class CatListAdapter: androidx.recyclerview.widget.ListAdapter<Cat, CatListAdapt
 
     class CatViewHolder(private val binding: CatItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        //private var selectCat: ISelectCat? = null
-
         fun bind(cat: Cat) {
             binding.apply {
                 Glide.with(itemView).load(cat.url).into(image)
             }
             binding.image.apply {
                 setOnClickListener {
-                    //selectCat = context as ISelectCat?
-                    //selectCat?.onCatSelected(cat.url)
+                    val action = CatFragmentDirections.actionCatFragmentToShowCatFragment(catUrl = cat.url)
+                    Navigation.findNavController(itemView).navigate(action)
                 }
             }
         }

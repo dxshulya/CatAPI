@@ -21,6 +21,7 @@
         tools:layout="@layout/show_cat" >
         <argument
             android:name="catUrl"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="false"/>
     </fragment>
 </navigation>

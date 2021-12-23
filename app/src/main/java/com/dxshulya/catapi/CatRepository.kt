@@ -1,6 +1,7 @@
 package com.dxshulya.catapi
 
 import androidx.lifecycle.MutableLiveData
+import com.dxshulya.catapi.api.ApiService
 import com.dxshulya.catapi.model.Cat
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -21,7 +22,6 @@ class CatRepository (private val api: ApiService?) {
                                 data.value = it
                             }
                             })
-                    //compositeDisposable.dispose()
                 }
             return data
         }
