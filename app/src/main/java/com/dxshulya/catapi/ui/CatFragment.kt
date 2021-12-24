@@ -17,14 +17,21 @@ class CatFragment : Fragment(R.layout.cat_list), ToolbarBackArrow {
     private val viewModel: MainViewModel by viewModels()
     private val catListAdapter = CatListAdapter()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         this.disableToolBar()
+
         val view = inflater.inflate(R.layout.cat_list, container, false)
 
         val binding = CatListBinding.bind(view)
+
         binding.apply {
             recyclerView.apply {
                 adapter = catListAdapter

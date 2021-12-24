@@ -6,6 +6,26 @@
     app:startDestination="@id/catFragment">
 
     <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.dxshulya.catapi.ui.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_apiKeyFragment"
+            app:destination="@id/apiKeyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/apiKeyFragment"
+        android:name="com.dxshulya.catapi.ui.ApiKeyFragment"
+        android:label="apiKey_fragment"
+        tools:layout="@layout/fragment_api_key">
+        <action
+            android:id="@+id/action_apiKeyFragment_to_catFragment"
+            app:destination="@id/catFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/catFragment"
         android:name="com.dxshulya.catapi.ui.CatFragment"
         android:label="news_fragment"

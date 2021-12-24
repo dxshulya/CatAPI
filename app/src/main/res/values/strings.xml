@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Коты</string>
-    <string name="back_button">Назад в список</string>
-    <string name="title_list">Список котиков</string>
-    <string name="title_cat">Выбранный котик</string>
-    <string name="amountCats">10</string>
+    <string name="email">E-mail</string>
+    <string name="desc">Description</string>
+    <string name="next_button">Дальше</string>
+    <string name="api_key">put your api key here</string>
 </resources>

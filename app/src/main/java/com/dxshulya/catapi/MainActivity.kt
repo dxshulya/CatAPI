@@ -13,24 +13,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        /*val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-
-        if(currentFragment == null) {
-            val fragment = CatFragment.newInstance()
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit()
-        }*/
     }
-
-    /*override fun onCatSelected(url: String) {
-        val fragment = ShowCatFragment.newInstance(url)
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
-    }*/
 }
