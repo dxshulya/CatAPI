@@ -29,10 +29,10 @@
         android:id="@+id/catFragment"
         android:name="com.dxshulya.catapi.ui.CatFragment"
         android:label="news_fragment"
-        tools:layout="@layout/cat_list" >
+        tools:layout="@layout/cat_list">
         <action
             android:id="@+id/action_catFragment_to_showCatFragment"
-            app:destination="@id/showCatFragment" />
+            app:destination="@id/showCatFragment"/>
     </fragment>
     <fragment
         android:id="@+id/showCatFragment"

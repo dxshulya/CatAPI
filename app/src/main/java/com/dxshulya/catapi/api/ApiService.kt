@@ -1,7 +1,7 @@
 package com.dxshulya.catapi.api
 
 import com.dxshulya.catapi.model.Cat
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
 interface ApiService {

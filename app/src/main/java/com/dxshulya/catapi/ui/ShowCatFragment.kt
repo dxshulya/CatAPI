@@ -38,6 +38,7 @@ class ShowCatFragment : Fragment(), ToolbarBackArrow {
         val catUrl = args.catUrl
 
         Glide.with(this).load(catUrl).into(imageCat)
+
         return view
     }
 }
