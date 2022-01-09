@@ -2,7 +2,7 @@ package com.dxshulya.catapi
 
 import com.dxshulya.catapi.modules.NetModule
 import com.dxshulya.catapi.modules.RepositoryModule
-import com.dxshulya.catapi.ui.MainViewModel
+import com.dxshulya.catapi.ui.main.MainViewModel
 import dagger.Component
 import javax.inject.Singleton
 

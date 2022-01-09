@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dxshulya.catapi.databinding.CatItemBinding
 import com.dxshulya.catapi.model.Cat
-import com.dxshulya.catapi.ui.CatFragmentDirections
+import com.dxshulya.catapi.ui.main.CatFragmentDirections
 
 class CatListAdapter: androidx.recyclerview.widget.ListAdapter<Cat, CatListAdapter.CatViewHolder>(CatDiffCallback()) {
 

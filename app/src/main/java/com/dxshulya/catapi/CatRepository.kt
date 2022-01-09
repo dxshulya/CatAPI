@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 const val AMOUNT_OF_CATS = "10"
 
-class CatRepository (private val api: ApiService?) {
+class CatRepository(private val api: ApiService?) {
     val getCatLiveData: MutableLiveData<MutableList<Cat>>
         get() {
             val data: MutableLiveData<MutableList<Cat>> = MutableLiveData<MutableList<Cat>>()
@@ -19,7 +19,8 @@ class CatRepository (private val api: ApiService?) {
                 ?.subscribe({
                     data.value = it
                 }, {
-                    Log.e("error", it.message.toString())})
+                    Log.e("error", it.message.toString())
+                })
             return data
         }
 }

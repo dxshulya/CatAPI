@@ -13,7 +13,9 @@ interface ApiService {
     ): Observable<MutableList<Cat>>
 
     @POST("user/passwordlesssignup")
-    fun loginUser(): Observable<List<Authorization>>
+    fun loginIn(
+        @Body body: User
+    ): Observable<Authorization>
 
     @GET("favourites")
     fun getApiKey(

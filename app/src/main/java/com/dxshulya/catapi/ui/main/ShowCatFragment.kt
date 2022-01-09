@@ -1,4 +1,4 @@
-package com.dxshulya.catapi.ui
+package com.dxshulya.catapi.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

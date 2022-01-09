@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.dxshulya.catapi.ui.LoginFragment"
+        android:name="com.dxshulya.catapi.ui.login.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/apiKeyFragment"
-        android:name="com.dxshulya.catapi.ui.ApiKeyFragment"
+        android:name="com.dxshulya.catapi.ui.apikey.ApiKeyFragment"
         android:label="apiKey_fragment"
         tools:layout="@layout/fragment_api_key">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/catFragment"
-        android:name="com.dxshulya.catapi.ui.CatFragment"
+        android:name="com.dxshulya.catapi.ui.main.CatFragment"
         android:label="news_fragment"
         tools:layout="@layout/cat_list">
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/showCatFragment"
-        android:name="com.dxshulya.catapi.ui.ShowCatFragment"
+        android:name="com.dxshulya.catapi.ui.main.ShowCatFragment"
         android:label="show_cat_fragment"
         tools:layout="@layout/show_cat" >
         <argument

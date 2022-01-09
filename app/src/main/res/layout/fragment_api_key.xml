@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/apiKeyFragment"
     android:padding="40dp"
-    tools:context=".ui.ApiKeyFragment">
+    tools:context=".ui.apikey.ApiKeyFragment">
 
     <EditText
         android:id="@+id/api_key_edit_text"
