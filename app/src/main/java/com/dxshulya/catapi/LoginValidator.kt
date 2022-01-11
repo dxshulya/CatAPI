@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Button
 import com.google.android.material.textfield.TextInputEditText
 
-class LoginValid(private var edList: Array<TextInputEditText>, v: Button) :
+class LoginValidator(private var edList: Array<TextInputEditText>, v: Button) :
     TextWatcher {
     private var v: View = v
     var emailPattern = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")

@@ -13,7 +13,7 @@ class App : Application() {
         app = this
 
         appComponent = DaggerAppComponent.builder()
-            .netModule(NetModule("https://api.thecatapi.com/v1/", "f6880836-42d2-4988-b97b-e87481d59352"))
+            .netModule(NetModule("https://api.thecatapi.com/v1/", "f6880836-42d2-4988-b97b-e87481d59352", this))
             .repositoryModule(RepositoryModule())
             .build()
     }
