@@ -19,7 +19,7 @@ class ApiKeyFragment : Fragment() {
     private lateinit var nextButton: Button
     private lateinit var apikey: TextInputEditText
 
-    private val apiKeyViewModel: ApiKeyViewModel by viewModels()
+    private val viewModel: ApiKeyViewModel by viewModels()
 
     private fun showErrorWindow(message: String) {
         context?.let {
@@ -43,17 +43,11 @@ class ApiKeyFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val action = ApiKeyFragmentDirections.actionApiKeyFragmentToCatFragment()
-            apiKeyViewModel.updateApiKey(apikey.text.toString())
-            apiKeyViewModel.getApikey.observe(viewLifecycleOwner) {
+            viewModel.getApiKey(apikey.text.toString())
+            viewModel.setApiKey.observe(viewLifecycleOwner) {
                 if (it.status == 401) showErrorWindow(it.message)
                 else Navigation.findNavController(view).navigate(action)
             }
-//            apiKeyViewModel.getApiKeyLiveData.observe(viewLifecycleOwner) {
-//                if (it.status == 401) showErrorWindow(it.message)
-//                 else Navigation.findNavController(view).navigate(action)
-//            }
-//            apiKeyViewModel.updateApiKey(apikey.text.toString())
-            //apiKeyViewModel.getRequest()
         }
     }
 

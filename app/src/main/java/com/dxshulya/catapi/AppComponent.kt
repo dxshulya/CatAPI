@@ -15,5 +15,4 @@ interface AppComponent {
     fun inject(mainViewModel: MainViewModel)
     fun inject(loginViewModel: LoginViewModel)
     fun inject(apiKeyViewModel: ApiKeyViewModel)
-    fun inject(sharedPreferenceRepository: SharedPreferenceRepository)
 }

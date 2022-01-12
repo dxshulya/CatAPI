@@ -11,10 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.dxshulya.catapi.LoginValidator
 import com.dxshulya.catapi.R
-import com.dxshulya.catapi.SharedPreferenceRepository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
-import javax.inject.Inject
 
 class LoginFragment : Fragment() {
 
@@ -22,7 +20,7 @@ class LoginFragment : Fragment() {
     private lateinit var email: TextInputEditText
     private lateinit var description: TextInputEditText
 
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     private fun showErrorWindow(message: String) {
         context?.let {
@@ -50,13 +48,14 @@ class LoginFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToApiKeyFragment()
-            loginViewModel.loginInLiveData.observe(viewLifecycleOwner) {
+            viewModel.getEmail(email.text.toString())
+            Log.e("Email: ", "" + email.text.toString())
+            viewModel.getDescription(description.text.toString())
+            Log.e("Desc: ", "" + description.text.toString())
+            viewModel.loginIn.observe(viewLifecycleOwner) {
                 if (it.status == 400) showErrorWindow(it.message)
                 else Navigation.findNavController(view).navigate(action)
             }
-            loginViewModel.updateEmail(email.text.toString())
-            loginViewModel.updateDescription(description.text.toString())
-            loginViewModel.postRequest()
         }
 
     }
