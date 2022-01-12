@@ -4,9 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
 import com.dxshulya.catapi.App
 import com.dxshulya.catapi.CatRepository
 import com.dxshulya.catapi.SharedPreferenceRepository
+import com.dxshulya.catapi.databinding.FragmentLoginBinding
 import com.dxshulya.catapi.model.Authorization
 import com.dxshulya.catapi.model.User
 import com.google.gson.Gson

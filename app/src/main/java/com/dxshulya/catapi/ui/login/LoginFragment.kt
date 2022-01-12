@@ -1,6 +1,7 @@
 package com.dxshulya.catapi.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.dxshulya.catapi.LoginValidator
 import com.dxshulya.catapi.R
+import com.dxshulya.catapi.SharedPreferenceRepository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import javax.inject.Inject
 
 class LoginFragment : Fragment() {
 

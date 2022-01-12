@@ -2,6 +2,7 @@ package com.dxshulya.catapi
 
 import com.dxshulya.catapi.modules.NetModule
 import com.dxshulya.catapi.modules.RepositoryModule
+import com.dxshulya.catapi.ui.apikey.ApiKeyViewModel
 import com.dxshulya.catapi.ui.login.LoginViewModel
 import com.dxshulya.catapi.ui.main.MainViewModel
 import dagger.Component
@@ -13,5 +14,6 @@ interface AppComponent {
     fun inject(catRepository: CatRepository)
     fun inject(mainViewModel: MainViewModel)
     fun inject(loginViewModel: LoginViewModel)
+    fun inject(apiKeyViewModel: ApiKeyViewModel)
     fun inject(sharedPreferenceRepository: SharedPreferenceRepository)
 }

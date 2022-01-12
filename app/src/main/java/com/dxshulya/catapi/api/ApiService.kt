@@ -20,5 +20,5 @@ interface ApiService {
     @GET("favourites")
     fun getApiKey(
         @Query("api_key") apiKey: String,
-    ): Observable<List<Authorization>>
+    ): Observable<Authorization>
 }
