@@ -1,7 +1,6 @@
 package com.dxshulya.catapi.ui.apikey
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +43,7 @@ class ApiKeyFragment : Fragment() {
         nextButton.setOnClickListener {
             val action = ApiKeyFragmentDirections.actionApiKeyFragmentToCatFragment()
             viewModel.getApiKey(apikey.text.toString())
-            viewModel.setApiKey.observe(viewLifecycleOwner) {
+            viewModel.apiKey.observe(viewLifecycleOwner) {
                 if (it.status == 401) showErrorWindow(it.message)
                 else Navigation.findNavController(view).navigate(action)
             }

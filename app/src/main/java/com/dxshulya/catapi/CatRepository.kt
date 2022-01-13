@@ -50,7 +50,7 @@ class CatRepository(private val api: ApiService) {
     val postLoginInLiveData: MutableLiveData<Authorization>
         get() {
             val data: MutableLiveData<Authorization> = MutableLiveData<Authorization>()
-            api.loginIn(body = User(loginViewModel.email.value.toString(), loginViewModel.description.value.toString()))
+            api.loginIn(User(loginViewModel.email.value.toString(), loginViewModel.description.value.toString()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

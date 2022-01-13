@@ -1,7 +1,6 @@
 package com.dxshulya.catapi.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,9 +48,7 @@ class LoginFragment : Fragment() {
         nextButton.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToApiKeyFragment()
             viewModel.getEmail(email.text.toString())
-            Log.e("Email: ", "" + email.text.toString())
             viewModel.getDescription(description.text.toString())
-            Log.e("Desc: ", "" + description.text.toString())
             viewModel.loginIn.observe(viewLifecycleOwner) {
                 if (it.status == 400) showErrorWindow(it.message)
                 else Navigation.findNavController(view).navigate(action)

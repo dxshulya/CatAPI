@@ -23,7 +23,7 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var catRepository: CatRepository
 
-    val setApiKey: LiveData<Authorization>
+    val apiKey: LiveData<Authorization>
         get() = catRepository.getApiKeyLiveData
 
     fun getApiKey(apikey: String) {
