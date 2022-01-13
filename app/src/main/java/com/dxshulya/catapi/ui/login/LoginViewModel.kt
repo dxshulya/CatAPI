@@ -1,6 +1,7 @@
 package com.dxshulya.catapi.ui.login
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,14 +12,10 @@ import javax.inject.Inject
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var _email = MutableLiveData<String>()
-    private var _description = MutableLiveData<String>()
-
-    val email: LiveData<String>
-        get() = _email
-
-    val description: LiveData<String>
-        get() = _description
+    companion object {
+        var email = ""
+        var description = ""
+    }
 
     init {
         App.getInstance().appComponent.inject(this)
@@ -30,11 +27,11 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val loginIn: LiveData<Authorization>
         get() = catRepository.postLoginInLiveData
 
-    fun getEmail(email: String) {
-        _email.value = email
+    fun getEmail(newEmail: String) {
+        email = newEmail
     }
 
-    fun getDescription(description: String) {
-        _description.value = description
+    fun getDescription(newDescription: String) {
+        description = newDescription
     }
 }

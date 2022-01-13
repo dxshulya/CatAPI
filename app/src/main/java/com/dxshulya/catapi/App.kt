@@ -1,8 +1,10 @@
 package com.dxshulya.catapi
 
 import android.app.Application
+import android.util.Log
 import com.dxshulya.catapi.modules.NetModule
 import com.dxshulya.catapi.modules.RepositoryModule
+import com.dxshulya.catapi.ui.apikey.ApiKeyViewModel
 
 class App : Application() {
 
@@ -13,9 +15,10 @@ class App : Application() {
         app = this
 
         appComponent = DaggerAppComponent.builder()
-            .netModule(NetModule("https://api.thecatapi.com/v1/", "f6880836-42d2-4988-b97b-e87481d59352"))
+            .netModule(NetModule("https://api.thecatapi.com/v1/", ApiKeyViewModel.apikey))
             .repositoryModule(RepositoryModule())
             .build()
+        Log.e("App","" + ApiKeyViewModel.apikey)
     }
 
     companion object {

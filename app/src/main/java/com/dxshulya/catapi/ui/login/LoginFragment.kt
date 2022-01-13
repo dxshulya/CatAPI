@@ -1,6 +1,7 @@
 package com.dxshulya.catapi.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class LoginFragment : Fragment() {
     private lateinit var email: TextInputEditText
     private lateinit var description: TextInputEditText
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     private fun showErrorWindow(message: String) {
         context?.let {
@@ -47,14 +48,14 @@ class LoginFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToApiKeyFragment()
-            viewModel.getEmail(email.text.toString())
-            viewModel.getDescription(description.text.toString())
-            viewModel.loginIn.observe(viewLifecycleOwner) {
+            loginViewModel.getEmail(email.text.toString())
+            loginViewModel.getDescription(description.text.toString())
+            loginViewModel.loginIn.observe(viewLifecycleOwner) {
+                Log.e("Error", "" + it.status)
                 if (it.status == 400) showErrorWindow(it.message)
                 else Navigation.findNavController(view).navigate(action)
             }
         }
-
     }
 
     override fun onCreateView(

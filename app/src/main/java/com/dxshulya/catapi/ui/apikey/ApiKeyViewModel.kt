@@ -11,10 +11,9 @@ import javax.inject.Inject
 
 class ApiKeyViewModel (application: Application) : AndroidViewModel(application) {
 
-    private var _apikey = MutableLiveData<String>().apply { value = "" }
-
-    val apikey: LiveData<String>
-        get() = _apikey
+    companion object {
+        var apikey = ""
+    }
 
     init {
         App.getInstance().appComponent.inject(this)
@@ -26,7 +25,7 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
     val apiKey: LiveData<Authorization>
         get() = catRepository.getApiKeyLiveData
 
-    fun getApiKey(apikey: String) {
-        _apikey.value = apikey
+    fun getApiKey(newApiKey: String) {
+        apikey = newApiKey
     }
 }
