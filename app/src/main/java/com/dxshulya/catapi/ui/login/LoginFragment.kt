@@ -50,11 +50,11 @@ class LoginFragment : Fragment() {
             val action = LoginFragmentDirections.actionLoginFragmentToApiKeyFragment()
             loginViewModel.getEmail(email.text.toString())
             loginViewModel.getDescription(description.text.toString())
-            loginViewModel.loginIn.observe(viewLifecycleOwner) {
-                Log.e("Error", "" + it.status)
+            loginViewModel.loginData.observe(viewLifecycleOwner) {
                 if (it.status == 400) showErrorWindow(it.message)
                 else Navigation.findNavController(view).navigate(action)
             }
+            loginViewModel.postLoginIn()
         }
     }
 

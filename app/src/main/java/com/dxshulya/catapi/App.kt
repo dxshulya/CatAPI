@@ -18,7 +18,6 @@ class App : Application() {
             .netModule(NetModule("https://api.thecatapi.com/v1/", ApiKeyViewModel.apikey))
             .repositoryModule(RepositoryModule())
             .build()
-        Log.e("App","" + ApiKeyViewModel.apikey)
     }
 
     companion object {

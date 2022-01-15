@@ -9,6 +9,7 @@ import com.dxshulya.catapi.model.User
 import com.dxshulya.catapi.ui.apikey.ApiKeyViewModel
 import com.dxshulya.catapi.ui.login.LoginViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 const val AMOUNT_OF_CATS = "10"
@@ -29,31 +30,15 @@ class CatRepository(private val api: ApiService) {
             return data
         }
 
-    val getApiKeyLiveData: MutableLiveData<Authorization>
-       get() {
-            val data: MutableLiveData<Authorization> = MutableLiveData<Authorization>()
-            api.getApiKey(ApiKeyViewModel.apikey)
-               .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    data.value = it
-               }, {
-                  Log.e("АПИКЛЮЧ", it.message.toString())
-                })
-            return data
-        }
+    fun postLoginIn(user: User): Observable<Authorization> {
+        return api.loginIn(user)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-    val postLoginInLiveData: MutableLiveData<Authorization>
-        get() {
-            val data: MutableLiveData<Authorization> = MutableLiveData<Authorization>()
-            api.loginIn(User(LoginViewModel.email, LoginViewModel.description))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    data.value = it
-                }, {
-                    Log.e("Авторизация", it.message.toString())
-                })
-            return data
-        }
+    fun getApiKey(apikey: String): Observable<Authorization> {
+        return api.getApiKey(apikey)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

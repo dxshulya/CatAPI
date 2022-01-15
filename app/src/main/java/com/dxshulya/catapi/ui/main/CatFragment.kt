@@ -39,7 +39,6 @@ class CatFragment : Fragment(R.layout.cat_list), ToolbarBackArrow {
         savedInstanceState: Bundle?
     ): View? {
         this.disableToolBar()
-
         val view = inflater.inflate(R.layout.cat_list, container, false)
         return view
     }

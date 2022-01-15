@@ -7,7 +7,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dxshulya.catapi.App
 import com.dxshulya.catapi.CatRepository
+import com.dxshulya.catapi.SharedPreference
 import com.dxshulya.catapi.model.Authorization
+import com.dxshulya.catapi.model.User
+import com.google.gson.Gson
+import com.google.gson.TypeAdapter
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
@@ -24,8 +29,26 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     @Inject
     lateinit var catRepository: CatRepository
 
-    val loginIn: LiveData<Authorization>
-        get() = catRepository.postLoginInLiveData
+    private var _loginData = MutableLiveData<Authorization>()
+    val loginData: LiveData<Authorization>
+        get() = _loginData
+
+    fun postLoginIn() {
+        val user = User(email, description)
+        catRepository.postLoginIn(user)
+            .subscribe({
+                _loginData.value = it
+            }, {
+                if (it is HttpException) {
+                    val body = it.response()?.errorBody()
+                    val gson = Gson()
+                    val adapter: TypeAdapter<Authorization> =
+                        gson.getAdapter(Authorization::class.java)
+                    val error: Authorization = adapter.fromJson(body?.string())
+                    _loginData.value = error
+                }
+            })
+    }
 
     fun getEmail(newEmail: String) {
         email = newEmail

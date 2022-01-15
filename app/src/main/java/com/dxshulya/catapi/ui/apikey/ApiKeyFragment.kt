@@ -1,6 +1,7 @@
 package com.dxshulya.catapi.ui.apikey
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ class ApiKeyFragment : Fragment() {
     private lateinit var nextButton: Button
     private lateinit var apikey: TextInputEditText
 
-    private val viewModel: ApiKeyViewModel by viewModels()
+    private val apiKeyViewModel: ApiKeyViewModel by viewModels()
 
     private fun showErrorWindow(message: String) {
         context?.let {
@@ -42,11 +43,17 @@ class ApiKeyFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val action = ApiKeyFragmentDirections.actionApiKeyFragmentToCatFragment()
-            viewModel.getApiKey(apikey.text.toString())
-            viewModel.apiKey.observe(viewLifecycleOwner) {
-                if (it.status == 401) showErrorWindow(it.message)
-                else Navigation.findNavController(view).navigate(action)
+            apiKeyViewModel.getApiKey(apikey.text.toString())
+            apiKeyViewModel.eApiKeyData.observe(viewLifecycleOwner) {
+                if (it.status == 401) {
+                    showErrorWindow(it.message)
+                    Log.e("ERROR", it.status.toString())
+                }
             }
+            apiKeyViewModel.apikeyData.observe(viewLifecycleOwner) {
+                Navigation.findNavController(view).navigate(action)
+            }
+            apiKeyViewModel.getApiKey()
         }
     }
 
