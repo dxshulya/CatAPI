@@ -8,33 +8,43 @@
     android:id="@+id/apiKeyFragment"
     tools:context=".ui.apikey.ApiKeyFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/api_key_edit_text"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="150dp"
+        android:layout_height="100dp"
+        android:text="@string/app_name"
+        android:textColor="@color/purple_500"
+        android:layout_marginTop="60dp"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/apikey_edit_text"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/api_key"
+        android:inputType="textEmailAddress"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/api_key"
+            android:id="@+id/apikey"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/custom_input"
-            android:hint="@string/api_key" />
+            android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/next_button_api_key"
+        android:id="@+id/next_button_apikey"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="50dp"
-        android:text="@string/next_button"/>
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/next_button"
+        android:layout_marginTop="100dp"
+        app:icon="@drawable/ic_right"
+        app:iconGravity="end"/>
 
 </LinearLayout>

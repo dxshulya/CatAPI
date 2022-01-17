@@ -14,14 +14,19 @@ class App : Application() {
         super.onCreate()
         app = this
 
+        var sharedPreference = SharedPreference(applicationContext)
+
         appComponent = DaggerAppComponent.builder()
-            .netModule(NetModule("https://api.thecatapi.com/v1/", ApiKeyViewModel.apikey))
+            .netModule(NetModule("https://api.thecatapi.com/v1/", sharedPreference.apikey, this))
             .repositoryModule(RepositoryModule())
             .build()
+
+        Log.e("АпиКлюч из Арр", "" + sharedPreference.apikey)
     }
 
     companion object {
         private lateinit var app: App
+
         @Synchronized
         fun getInstance(): App {
             return app

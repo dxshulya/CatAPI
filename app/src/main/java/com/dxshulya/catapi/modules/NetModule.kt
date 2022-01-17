@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetModule (private val baseUrl: String, private val key: String) {
+class NetModule (private val baseUrl: String, private val key: String, private val application: Application) {
 
     @Provides
     @Singleton
@@ -29,6 +29,10 @@ class NetModule (private val baseUrl: String, private val key: String) {
             .client(client)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context = application
 
     @Provides
     @Singleton

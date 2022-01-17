@@ -1,10 +1,9 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.validators
 
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 
 class ApiKeyValidator(private val editText: TextInputEditText, button: Button): TextWatcher {

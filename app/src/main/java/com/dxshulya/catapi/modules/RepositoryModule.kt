@@ -1,7 +1,9 @@
 package com.dxshulya.catapi.modules
 
+import android.content.Context
 import com.dxshulya.catapi.api.ApiService
 import com.dxshulya.catapi.CatRepository
+import com.dxshulya.catapi.SharedPreference
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,5 +15,10 @@ class RepositoryModule {
     @Singleton
     fun provideCatRepository(api: ApiService): CatRepository {
         return CatRepository(api)
+    }
+    @Provides
+    @Singleton
+    fun provideSharedPreference(context: Context): SharedPreference {
+        return SharedPreference(context)
     }
 }

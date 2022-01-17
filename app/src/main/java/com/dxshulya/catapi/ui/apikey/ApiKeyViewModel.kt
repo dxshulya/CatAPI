@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dxshulya.catapi.App
 import com.dxshulya.catapi.CatRepository
+import com.dxshulya.catapi.SharedPreference
 import com.dxshulya.catapi.model.Authorization
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
@@ -14,16 +15,15 @@ import javax.inject.Inject
 
 class ApiKeyViewModel(application: Application) : AndroidViewModel(application) {
 
-    companion object {
-        var apikey = ""
-    }
-
     init {
         App.getInstance().appComponent.inject(this)
     }
 
     @Inject
     lateinit var catRepository: CatRepository
+
+    @Inject
+    lateinit var sharedPreference: SharedPreference
 
     private var _apikeyData = MutableLiveData<Boolean>()
     val apikeyData: LiveData<Boolean>
@@ -33,8 +33,8 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
     val eApiKeyData: LiveData<Authorization>
         get() = _eApiKeyData
 
-    fun getApiKey() {
-        catRepository.getApiKey(apikey)
+    fun getApiKeyRequest() {
+        catRepository.getApiKey(sharedPreference.apikey)
             .subscribe({
                 _apikeyData.postValue(true)
             }, {
@@ -51,7 +51,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
             })
     }
 
-    fun getApiKey(newApiKey: String) {
-        apikey = newApiKey
+    fun updateApiKey(apiKey: String) {
+        sharedPreference.apikey = apiKey
     }
 }

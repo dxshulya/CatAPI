@@ -1,7 +1,6 @@
 package com.dxshulya.catapi.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.dxshulya.catapi.LoginValidator
 import com.dxshulya.catapi.R
+import com.dxshulya.catapi.SharedPreference
+import com.dxshulya.catapi.validators.LoginValidator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 
@@ -43,18 +43,25 @@ class LoginFragment : Fragment() {
         description = view.findViewById(R.id.description)
 
         val edList = arrayOf(email, description)
-        val textWatcher = LoginValidator(edList = edList, nextButton)
+        val textWatcher = LoginValidator(edList, nextButton)
         for (editText in edList) editText.addTextChangedListener(textWatcher)
 
         nextButton.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToApiKeyFragment()
-            loginViewModel.getEmail(email.text.toString())
-            loginViewModel.getDescription(description.text.toString())
-            loginViewModel.loginData.observe(viewLifecycleOwner) {
-                if (it.status == 400) showErrorWindow(it.message)
-                else Navigation.findNavController(view).navigate(action)
+            val actionNow = LoginFragmentDirections.actionLoginFragmentToCatFragment()
+
+            val sharedPreference = SharedPreference(requireContext())
+            if (email.text.toString() == sharedPreference.email) {
+                Navigation.findNavController(view).navigate(actionNow)
+            } else {
+                loginViewModel.loginData.observe(viewLifecycleOwner) {
+                    if (it.status == 400) showErrorWindow(it.message)
+                    else Navigation.findNavController(view).navigate(action)
+                }
+                loginViewModel.updateEmail(email.text.toString())
+                loginViewModel.updateDescription(description.text.toString())
+                loginViewModel.postLoginInRequest()
             }
-            loginViewModel.postLoginIn()
         }
     }
 

@@ -1,7 +1,6 @@
 package com.dxshulya.catapi.ui.apikey
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.dxshulya.catapi.ApiKeyValidator
+import com.dxshulya.catapi.validators.ApiKeyValidator
 import com.dxshulya.catapi.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -33,27 +32,24 @@ class ApiKeyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        nextButton = view.findViewById(R.id.next_button_api_key)
+        nextButton = view.findViewById(R.id.next_button_apikey)
         nextButton.isEnabled = false
 
-        apikey = view.findViewById(R.id.api_key)
+        apikey = view.findViewById(R.id.apikey)
 
         val textWatcher = ApiKeyValidator(apikey, nextButton)
         apikey.addTextChangedListener(textWatcher)
 
         nextButton.setOnClickListener {
             val action = ApiKeyFragmentDirections.actionApiKeyFragmentToCatFragment()
-            apiKeyViewModel.getApiKey(apikey.text.toString())
             apiKeyViewModel.eApiKeyData.observe(viewLifecycleOwner) {
-                if (it.status == 401) {
-                    showErrorWindow(it.message)
-                    Log.e("ERROR", it.status.toString())
-                }
+                if (it.status == 401) showErrorWindow(it.message)
             }
             apiKeyViewModel.apikeyData.observe(viewLifecycleOwner) {
                 Navigation.findNavController(view).navigate(action)
             }
-            apiKeyViewModel.getApiKey()
+            apiKeyViewModel.updateApiKey(apikey.text.toString())
+            apiKeyViewModel.getApiKeyRequest()
         }
     }
 

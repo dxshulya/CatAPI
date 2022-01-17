@@ -1,4 +1,4 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.validators
 
 import android.text.Editable
 import android.text.TextWatcher
