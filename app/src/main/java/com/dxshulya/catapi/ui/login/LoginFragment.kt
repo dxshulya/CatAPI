@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -51,18 +52,25 @@ class LoginFragment : Fragment() {
             val actionNow = LoginFragmentDirections.actionLoginFragmentToCatFragment()
 
             val sharedPreference = SharedPreference(requireContext())
-            if (email.text.toString() == sharedPreference.email) {
+
+            if (email.text.toString() == sharedPreference.email && sharedPreference.apikey != "") {
                 Navigation.findNavController(view).navigate(actionNow)
             } else {
                 loginViewModel.loginData.observe(viewLifecycleOwner) {
-                    if (it.status == 400) showErrorWindow(it.message)
-                    else Navigation.findNavController(view).navigate(action)
+                    if (it.status == 400) {
+                        showErrorWindow(it.message)
+                        loginViewModel.updateEmail("")
+                        loginViewModel.updateDescription("")
+                    } else {
+                        Navigation.findNavController(view).navigate(action)
+                    }
                 }
                 loginViewModel.updateEmail(email.text.toString())
                 loginViewModel.updateDescription(description.text.toString())
                 loginViewModel.postLoginInRequest()
             }
         }
+
     }
 
     override fun onCreateView(

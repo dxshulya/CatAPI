@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.dxshulya.catapi.validators.ApiKeyValidator
 import com.dxshulya.catapi.R
+import com.dxshulya.catapi.validators.ApiKeyValidator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 
@@ -43,7 +44,10 @@ class ApiKeyFragment : Fragment() {
         nextButton.setOnClickListener {
             val action = ApiKeyFragmentDirections.actionApiKeyFragmentToCatFragment()
             apiKeyViewModel.eApiKeyData.observe(viewLifecycleOwner) {
-                if (it.status == 401) showErrorWindow(it.message)
+                if (it.status == 401) {
+                    apiKeyViewModel.updateApiKey("")
+                    showErrorWindow(it.message)
+                }
             }
             apiKeyViewModel.apikeyData.observe(viewLifecycleOwner) {
                 Navigation.findNavController(view).navigate(action)
