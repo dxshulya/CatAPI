@@ -10,6 +10,7 @@ interface ApiService {
     @GET("images/search")
     fun getCatList(
         @Query("limit") amountOfCats: String,
+        
     ): Observable<MutableList<Cat>>
 
     @POST("user/passwordlesssignup")
