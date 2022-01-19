@@ -56,6 +56,8 @@ class LoginFragment : Fragment() {
             loginViewModel.loginData.observe(viewLifecycleOwner) {
                 if (it.status == 400) {
                     showErrorWindow(it.message)
+                    loginViewModel.updateEmail("")
+                    loginViewModel.updateDescription("")
                 } else {
                     Navigation.findNavController(view).navigate(action)
                 }
