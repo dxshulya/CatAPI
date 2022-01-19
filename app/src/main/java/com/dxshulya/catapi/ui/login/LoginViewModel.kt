@@ -5,10 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dxshulya.catapi.App
-import com.dxshulya.catapi.CatRepository
-import com.dxshulya.catapi.SharedPreference
+import com.dxshulya.catapi.datastore.SharedPreference
 import com.dxshulya.catapi.model.Authorization
 import com.dxshulya.catapi.model.User
+import com.dxshulya.catapi.repository.CatRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -30,6 +30,11 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val loginData: LiveData<Authorization>
         get() = _loginData
 
+    fun checkBadRequest() {
+
+    }
+
+
     fun postLoginInRequest() {
         val user = User(sharedPreference.email, sharedPreference.description)
         catRepository.postLoginIn(user)
@@ -50,6 +55,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     fun updateEmail(email: String) {
         sharedPreference.email = email
     }
+
     fun updateDescription(description: String) {
         sharedPreference.description = description
     }

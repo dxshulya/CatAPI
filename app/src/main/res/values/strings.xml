@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Коты</string>
+    <string name="app_name">Neko</string>
     <string name="email">E-mail</string>
     <string name="desc">Description</string>
-    <string name="next_button">Дальше</string>
+    <string name="next_button">Next</string>
+    <string name="error_window_title">ERROR</string>
+    <string name="error_window_button">OK</string>
     <string name="api_key">put your api key here</string>
 </resources>

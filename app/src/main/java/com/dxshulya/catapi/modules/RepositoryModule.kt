@@ -2,8 +2,8 @@ package com.dxshulya.catapi.modules
 
 import android.content.Context
 import com.dxshulya.catapi.api.ApiService
-import com.dxshulya.catapi.CatRepository
-import com.dxshulya.catapi.SharedPreference
+import com.dxshulya.catapi.datastore.SharedPreference
+import com.dxshulya.catapi.repository.CatRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

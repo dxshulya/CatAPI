@@ -1,7 +1,9 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.di
 
+import com.dxshulya.catapi.datastore.SharedPreference
 import com.dxshulya.catapi.modules.NetModule
 import com.dxshulya.catapi.modules.RepositoryModule
+import com.dxshulya.catapi.repository.CatRepository
 import com.dxshulya.catapi.ui.apikey.ApiKeyViewModel
 import com.dxshulya.catapi.ui.login.LoginViewModel
 import com.dxshulya.catapi.ui.main.MainViewModel

@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.dxshulya.catapi.App
 import com.dxshulya.catapi.model.Cat
-import com.dxshulya.catapi.CatRepository
+import com.dxshulya.catapi.repository.CatRepository
 import javax.inject.Inject
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {

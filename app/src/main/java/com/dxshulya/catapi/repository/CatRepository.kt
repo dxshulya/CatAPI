@@ -1,4 +1,4 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

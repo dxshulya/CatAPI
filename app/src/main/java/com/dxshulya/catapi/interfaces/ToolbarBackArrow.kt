@@ -1,4 +1,4 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.interfaces
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity

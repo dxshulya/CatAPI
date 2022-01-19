@@ -2,9 +2,11 @@ package com.dxshulya.catapi
 
 import android.app.Application
 import android.util.Log
+import com.dxshulya.catapi.datastore.SharedPreference
+import com.dxshulya.catapi.di.AppComponent
+import com.dxshulya.catapi.di.DaggerAppComponent
 import com.dxshulya.catapi.modules.NetModule
 import com.dxshulya.catapi.modules.RepositoryModule
-import com.dxshulya.catapi.ui.apikey.ApiKeyViewModel
 
 class App : Application() {
 
@@ -14,7 +16,7 @@ class App : Application() {
         super.onCreate()
         app = this
 
-        var sharedPreference = SharedPreference(applicationContext)
+        val sharedPreference = SharedPreference(applicationContext)
 
         appComponent = DaggerAppComponent.builder()
             .netModule(NetModule("https://api.thecatapi.com/v1/", sharedPreference.apikey, this))

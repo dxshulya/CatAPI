@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.dxshulya.catapi.R
-import com.dxshulya.catapi.ToolbarBackArrow
+import com.dxshulya.catapi.interfaces.ToolbarBackArrow
 
 class ShowCatFragment : Fragment(), ToolbarBackArrow {
 

@@ -24,9 +24,9 @@ class ApiKeyFragment : Fragment() {
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
-                .setTitle("Ошибка")
+                .setTitle(getString(R.string.error_window_title))
                 .setMessage(message)
-                .setPositiveButton("Понятно") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(getString(R.string.error_window_button)) { dialog, _ -> dialog.dismiss() }
                 .show()
         }
     }

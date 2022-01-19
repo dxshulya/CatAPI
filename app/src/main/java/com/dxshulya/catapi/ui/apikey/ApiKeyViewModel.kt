@@ -5,9 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dxshulya.catapi.App
-import com.dxshulya.catapi.CatRepository
-import com.dxshulya.catapi.SharedPreference
+import com.dxshulya.catapi.datastore.SharedPreference
 import com.dxshulya.catapi.model.Authorization
+import com.dxshulya.catapi.repository.CatRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException

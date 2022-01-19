@@ -1,8 +1,8 @@
-package com.dxshulya.catapi
+package com.dxshulya.catapi.datastore
 
 import android.content.Context
 
-class SharedPreference(context: Context) : SharedPreferenceInterface {
+class SharedPreference(context: Context) {
 
     companion object {
         private const val EMAIL = "e-mail"
@@ -21,17 +21,17 @@ class SharedPreference(context: Context) : SharedPreferenceInterface {
         return sharedPreferences.getString(key, defaultValue) ?: defaultValue
     }
 
-    override var description: String
+    var description: String
         get() = getString(DESCRIPTION)
         set(value) {
             setString(DESCRIPTION, value)
         }
-    override var email: String
+    var email: String
         get() = getString(EMAIL)
         set(value) {
             setString(EMAIL, value)
         }
-    override var apikey: String
+    var apikey: String
         get() = getString(APIKEY)
         set(value) {
             setString(APIKEY, value)
