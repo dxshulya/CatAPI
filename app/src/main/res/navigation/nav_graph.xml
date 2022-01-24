@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/apiKeyFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/catFragment"
         android:name="com.dxshulya.catapi.ui.main.CatFragment"
-        android:label="news_fragment"
+        android:label="cat_fragment"
         tools:layout="@layout/cat_list">
         <action
             android:id="@+id/action_catFragment_to_showCatFragment"

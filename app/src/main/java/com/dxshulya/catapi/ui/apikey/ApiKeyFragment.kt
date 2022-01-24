@@ -1,11 +1,11 @@
 package com.dxshulya.catapi.ui.apikey
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -31,6 +31,16 @@ class ApiKeyFragment : Fragment() {
         }
     }
 
+    private fun checkErrorKey() {
+        apiKeyViewModel.eApiKeyData.observe(viewLifecycleOwner) {
+            if (apiKeyViewModel.checkKeyStatus()) {
+                apiKeyViewModel.updateApiKey("")
+                showErrorWindow(it.message)
+            }
+        }
+        Log.e("CHECK_ERROR_KEY", "" + apiKeyViewModel.checkKeyStatus().toString())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         nextButton = view.findViewById(R.id.next_button_apikey)
@@ -43,17 +53,14 @@ class ApiKeyFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val action = ApiKeyFragmentDirections.actionApiKeyFragmentToCatFragment()
-            apiKeyViewModel.eApiKeyData.observe(viewLifecycleOwner) {
-                if (it.status == 401) {
-                    apiKeyViewModel.updateApiKey("")
-                    showErrorWindow(it.message)
-                }
-            }
+            checkErrorKey()
             apiKeyViewModel.apikeyData.observe(viewLifecycleOwner) {
-                Navigation.findNavController(view).navigate(action)
+                Navigation.findNavController(requireView()).navigate(action)
             }
-            apiKeyViewModel.updateApiKey(apikey.text.toString())
-            apiKeyViewModel.getApiKeyRequest()
+            apiKeyViewModel.apply {
+                updateApiKey(apikey.text.toString())
+                getApiKeyRequest()
+            }
         }
     }
 
@@ -62,7 +69,6 @@ class ApiKeyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_api_key, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_api_key, container, false)
     }
 }

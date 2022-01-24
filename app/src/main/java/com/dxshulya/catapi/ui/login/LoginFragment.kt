@@ -1,6 +1,7 @@
 package com.dxshulya.catapi.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,23 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun checkErrorLogin() {
+        val action = LoginFragmentDirections.actionLoginFragmentToApiKeyFragment()
+        loginViewModel.loginData.observe(viewLifecycleOwner) {
+            if (loginViewModel.checkLoginStatus()) {
+                showErrorWindow(it.message)
+                loginViewModel.apply {
+                    updateEmail("")
+                    updateDescription("")
+                }
+            } else {
+                Navigation.findNavController(requireView()).navigate(action)
+            }
+            Log.e("CHECK_ERROR_LOGIN","" + loginViewModel.checkLoginStatus().toString())
+        }
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,7 +62,6 @@ class LoginFragment : Fragment() {
         nextButton.isEnabled = false
 
         email = view.findViewById(R.id.email)
-
         description = view.findViewById(R.id.description)
 
         val edList = arrayOf(email, description)
@@ -52,19 +69,12 @@ class LoginFragment : Fragment() {
         for (editText in edList) editText.addTextChangedListener(textWatcher)
 
         nextButton.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToApiKeyFragment()
-            loginViewModel.loginData.observe(viewLifecycleOwner) {
-                if (it.status == 400) {
-                    showErrorWindow(it.message)
-                    loginViewModel.updateEmail("")
-                    loginViewModel.updateDescription("")
-                } else {
-                    Navigation.findNavController(view).navigate(action)
-                }
+            checkErrorLogin()
+            loginViewModel.apply {
+                updateEmail(email.text.toString())
+                updateDescription(description.text.toString())
+                postLoginInRequest()
             }
-            loginViewModel.updateEmail(email.text.toString())
-            loginViewModel.updateDescription(description.text.toString())
-            loginViewModel.postLoginInRequest()
         }
     }
 
@@ -73,7 +83,6 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 }

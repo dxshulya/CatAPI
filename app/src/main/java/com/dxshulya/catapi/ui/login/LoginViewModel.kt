@@ -30,10 +30,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val loginData: LiveData<Authorization>
         get() = _loginData
 
-    fun checkBadRequest() {
-
+    fun checkLoginStatus(): Boolean {
+        return _loginData.value!!.status == 400
     }
-
 
     fun postLoginInRequest() {
         val user = User(sharedPreference.email, sharedPreference.description)
