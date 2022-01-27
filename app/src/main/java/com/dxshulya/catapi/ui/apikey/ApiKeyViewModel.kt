@@ -33,10 +33,6 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
     val eApiKeyData: LiveData<Authorization>
         get() = _eApiKeyData
 
-    fun checkKeyStatus(): Boolean {
-        return _eApiKeyData.value!!.status == 401
-    }
-
     fun getApiKeyRequest() {
         catRepository.getApiKey(sharedPreference.apikey)
             .subscribe({

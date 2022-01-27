@@ -31,16 +31,6 @@ class ApiKeyFragment : Fragment() {
         }
     }
 
-    private fun checkErrorKey() {
-        apiKeyViewModel.eApiKeyData.observe(viewLifecycleOwner) {
-            if (apiKeyViewModel.checkKeyStatus()) {
-                apiKeyViewModel.updateApiKey("")
-                showErrorWindow(it.message)
-            }
-        }
-        Log.e("CHECK_ERROR_KEY", "" + apiKeyViewModel.checkKeyStatus().toString())
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         nextButton = view.findViewById(R.id.next_button_apikey)
@@ -53,14 +43,17 @@ class ApiKeyFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val action = ApiKeyFragmentDirections.actionApiKeyFragmentToCatFragment()
-            checkErrorKey()
+            apiKeyViewModel.eApiKeyData.observe(viewLifecycleOwner) {
+                if (it.status == 401) {
+                    apiKeyViewModel.updateApiKey("")
+                    showErrorWindow(it.message)
+                }
+            }
             apiKeyViewModel.apikeyData.observe(viewLifecycleOwner) {
-                Navigation.findNavController(requireView()).navigate(action)
+                Navigation.findNavController(view).navigate(action)
             }
-            apiKeyViewModel.apply {
-                updateApiKey(apikey.text.toString())
-                getApiKeyRequest()
-            }
+            apiKeyViewModel.updateApiKey(apikey.text.toString())
+            apiKeyViewModel.getApiKeyRequest()
         }
     }
 
@@ -69,6 +62,7 @@ class ApiKeyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_api_key, container, false)
+        val view = inflater.inflate(R.layout.fragment_api_key, container, false)
+        return view
     }
 }
