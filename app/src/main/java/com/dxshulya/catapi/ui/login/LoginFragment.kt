@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.dxshulya.catapi.R
 import com.dxshulya.catapi.validators.LoginValidator
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlin.math.log
@@ -52,6 +53,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         if (loginViewModel.sharedPreference.email != "") {
             val actionNow = LoginFragmentDirections.actionLoginFragmentToCatFragment()
