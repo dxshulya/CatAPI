@@ -17,6 +17,7 @@ class CatFragment : Fragment(R.layout.cat_list), ToolbarBackArrow {
 
     private val viewModel: MainViewModel by viewModels()
     private val catListAdapter = CatListAdapter()
+    private var isLoading = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,12 +29,15 @@ class CatFragment : Fragment(R.layout.cat_list), ToolbarBackArrow {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
+            swipeRefresh.setOnRefreshListener {
+                initViewModel()
+                swipeRefresh.isRefreshing = false
+            }
         }
-        initViewModel()
-        binding.swipeRefresh.setOnRefreshListener {
+        if (isLoading) {
             initViewModel()
-            binding.swipeRefresh.isRefreshing = false
         }
+        isLoading = false
     }
 
     private fun initViewModel() {
